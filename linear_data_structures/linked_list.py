@@ -57,18 +57,29 @@ class LinkedList:
         Linked List의 맨 첫번째(왼쪽)에 있는 Node를 제거한 후 data를 반환한다.
         
         """
-        
         if self.head is None:
             return None
         
         target_node = self.head
         data = target_node.data
-        
         self.head = self.head.next
-        
         self.length -= 1
         
         return data
+
+    def pop(self):
+        """
+        Linked List의 맨 마지막(오른쪽)에 있는 Node를 제거 후에 data를 반환한다.
+        """
+        if self.head is None:
+            return None
+        
+        target_node = None
+        head = self.head
+        while head.next is None:
+            head = head.next
+        target_node = head
+        
         
         
     
@@ -83,15 +94,13 @@ class LinkedList:
 if __name__ == "__main__":
     linked_list = LinkedList()
     
-    linked_list.appendleft(1)
-    linked_list.appendleft(2)
-    linked_list.appendleft(3)
+    for i in range(3):
+        linked_list.append(i)
     
-    head = linked_list.head
-    
-    linked_list.append(0)
+    linked_list.popleft()
     
     print(linked_list)
+
 
         
 
