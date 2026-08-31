@@ -168,6 +168,20 @@ class LinkedList:
         self.length -= 1
         return True
 
+    def reverse(self):
+        if self.length < 2:
+            return
+        prev = None
+        ahead = self.head.next
+        while ahead:
+            self.head.next = prev
+            prev = self.head
+            self.head = ahead
+            ahead = ahead.next
+        self.head.next = prev
+        
+        
+        
         
     
         
@@ -177,20 +191,11 @@ class LinkedList:
 if __name__ == "__main__":
     linked_list = LinkedList()
     
-    print(linked_list)
-    print(4 in linked_list)
-    
     for i in range(10):
         linked_list.append(i)
-    
-    
     print(linked_list)
-
-    print(9 in linked_list)
-    
-    for i in range(3): 
-        linked_list.pop()
         
+    linked_list.reverse()
     print(linked_list)
 
 
