@@ -40,6 +40,14 @@ class LinkedList:
         return result
     
     def insert(self, index: int, data):
+        """
+        만약 인덱스가 0이하면 appendleft로 삽입
+        만약 인덱스가 연결 리스트의 길이 이상이면 append로 삽입
+        
+        만약 인덱스가 0과 length 사이이면 임시 포인터로 index 직전 node find
+        후 삽입 후 next 연결
+        """
+        
         if index <= 0:
             self.appendleft(data)
             
