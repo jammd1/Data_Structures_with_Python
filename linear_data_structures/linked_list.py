@@ -169,6 +169,11 @@ class LinkedList:
         return True
 
     def reverse(self):
+        """
+        제자리 뒤집기
+        노드의 next 포인터를 뒤집는다
+        그리고 마지막 노드를 head 노드로 바꾼다.
+        """
         if self.length < 2:
             return
         prev = None
