@@ -15,6 +15,45 @@ class LinkedList:
     
     def __len__(self):
         return self.length
+
+    def __contains__(self, item):
+        if self.head is None:
+            return False
+        node = self.head
+        
+        while node is not None:
+            if node.data == item:
+                return True
+            node = node.next
+        return False
+    
+    def __str__(self):
+        
+        if self.head is None:
+            return "Linked List is Empty State"
+        
+        result = "HEAD ->"
+        head = self.head
+        while head:
+            result += str(head.data) + " -> "
+            head = head.next
+        return result
+    
+    def insert(self, index: int, data):
+        if index <= 0:
+            self.appendleft(data)
+            
+        elif index >= self.length:
+            self.append(data)
+        
+        else:
+            node = self.head
+            for _ in range(index - 1):
+                node = node.next
+            new_node = Node(data)
+            new_node.next = node.next
+            node.next = new_node
+            self.length += 1
     
     def appendleft(self, data):
         """ 
@@ -70,35 +109,80 @@ class LinkedList:
     def pop(self):
         """
         Linked List의 맨 마지막(오른쪽)에 있는 Node를 제거 후에 data를 반환한다.
+        
+        sudo 
+        find last node
+        find pre-last node
+        disconnect referrence from pre-last one to last one
         """
         if self.head is None:
             return None
         
-        target_node = None
-        head = self.head
-        while head.next is None:
-            head = head.next
-        target_node = head
+        node = self.head
         
-        
+        while node.next:
+            prev = node # prev를 기억
+            node = node.next
+            
+        if node == self.head: # 만약 원소 하나짜리 였으면
+            self.head = None
+        else:
+            prev.next = None # 만약 두개 이상의 원소가 있었으면
+            
+        self.length -= 1
+        return node.data
+    
+    def remove(self, target):
+        """
+        target 검색
+            ↓
+        못 찾음? ── Yes → False
+            ↓ No
+        첫 번째 노드인가?
+            ↓
+        Yes → head를 다음 노드로 이동
+        No  → 이전 노드와 다음 노드를 직접 연결
+            ↓
+        length - 1
+            ↓
+            True    
+        """
+        node = self.head
+        while node and node.data != target: # 노드 검색
+            prev = node
+            node = node.next
+        if node is None: # 검색했는데 아무것도 없을 경우
+            return False
+        if node == self.head: # 삭제하려는 노드가 head일 경우
+            self.head = self.head.next
+        else: # 삭제하려는 노드가 첫번째 노드가 아닌 경우
+            prev.next = node.next
+        self.length -= 1
+        return True
+
         
     
-    def __str__(self):
-        result = ""
-        head = self.head
-        while head:
-            result += str(head.data) + "->"
-            head = head.next
-        return result
+        
+      
+    
 
 if __name__ == "__main__":
     linked_list = LinkedList()
     
-    for i in range(3):
+    print(linked_list)
+    print(4 in linked_list)
+    
+    for i in range(10):
         linked_list.append(i)
     
-    linked_list.popleft()
     
+    print(linked_list)
+
+    print(9 in linked_list)
+    
+    for i in range(3): 
+        linked_list.pop()
+        
     print(linked_list)
 
 

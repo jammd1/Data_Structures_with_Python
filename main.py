@@ -1,4 +1,4 @@
-from linear_data_structures.linked_list import Node
+from linear_data_structures.linked_list import Node, LinkedList
 
 def main():
     data1 = 'head_data'
